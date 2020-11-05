@@ -4,6 +4,7 @@ import com.bob.domain.Order;
 import com.bob.domain.RawReceipt;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class OrderToReceiptMapper {
@@ -18,20 +19,18 @@ public class OrderToReceiptMapper {
     public static RawReceipt mapOrderToRawReceipt(Order order) {
         RawReceipt rawReceipt = new RawReceipt();
         // ITEMS
-        if (!order.getItems().isEmpty()) {
-            List<String> rawItemList = order.getItems().entrySet().stream()
-                    .map(item -> String.format(STRING_FORMAT_PATTERN_ORDER_ITEMS,
-                            item.getValue(),
-                            item.getKey().name(),
-                            item.getKey().getPrice(),
-                            item.getKey().getPrice() * item.getValue()))
-                    .collect(Collectors.toList());
+        List<String> rawItemList = order.getItems().entrySet().stream()
+                .map(item -> String.format(Locale.UK, STRING_FORMAT_PATTERN_ORDER_ITEMS,
+                        item.getValue(),
+                        item.getKey().name(),
+                        item.getKey().getPrice(),
+                        item.getKey().getPrice() * item.getValue()))
+                .collect(Collectors.toList());
 
-            rawReceipt.getOrderItemRows().addAll(rawItemList);
-        }
+        rawReceipt.getOrderItemRows().addAll(rawItemList);
 
         // TOTAL
-        rawReceipt.setOrderTotalRow(String.format(STRING_FORMAT_PATTERN_ORDER_TOTAL, order.getTotal()));
+        rawReceipt.setOrderTotalRow(String.format(Locale.UK, STRING_FORMAT_PATTERN_ORDER_TOTAL, order.getTotal()));
 
         return rawReceipt;
     }

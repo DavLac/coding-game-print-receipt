@@ -18,8 +18,8 @@ import java.util.stream.IntStream;
 @RunWith(Parameterized.class)
 public class BobsAutoRegisterTest {
 
-    private static final String REGEX_OUTPUT_ORDER_ITEMS = "^[0-9]{1,2} [a-zA-Z_]{1,50} @ £[0-9]{1,20},[0-9]{2} : £[0-9]{1,20},[0-9]{2}$";
-    private static final String REGEX_OUTPUT_ORDER_TOTAL = "^GRAND TOTAL : £[0-9]{1,20},[0-9]{2}$";
+    private static final String REGEX_OUTPUT_ORDER_ITEMS = "^[0-9]{1,2} [a-zA-Z_]{1,50} @ £[0-9]{1,20}.[0-9]{2} : £[0-9]{1,20}.[0-9]{2}$";
+    private static final String REGEX_OUTPUT_ORDER_TOTAL = "^GRAND TOTAL : £[0-9]{1,20}.[0-9]{2}$";
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
